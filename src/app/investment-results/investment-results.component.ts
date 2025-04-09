@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import type { AnnualData } from '../investment-input.model';
+import { Component, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { InvestmentService } from '../investment.service';
 type Data = {
   year: number | string;
   interest: number | string;
@@ -17,5 +17,9 @@ type Data = {
   styleUrl: './investment-results.component.css',
 })
 export class InvestmentResultsComponent {
-  @Input() results?: AnnualData[];
+  private investmentService = inject(InvestmentService);
+
+  get results() {
+    return this.investmentService.resultData;
+  }
 }
